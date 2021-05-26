@@ -1,0 +1,25 @@
+<style>
+    .shopping-list__button {
+    border: none;
+    background-color: inherit;
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+    display: inline-block;
+    }
+    .shopping-list__button:hover {background: #eee;}
+    .purchases {color: grey;}
+</style>
+
+{% if user.is_authenticated %}
+    {% if recipe.purchases.get.user %}
+        <button class="shopping-list__button purchases" name="purchases">
+            Удалить из покупок
+        </button>
+    {% else %}
+        <button class="button button_style_light-blue" name="purchases" data-out>
+            <span class="icon-plus button__icon"></span>
+            Добавить в покупки
+        </button>
+    {% endif %}
+{% endif %}

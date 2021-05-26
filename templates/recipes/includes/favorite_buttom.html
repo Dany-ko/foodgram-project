@@ -1,0 +1,12 @@
+{% if user.is_authenticated %}
+    {% if recipe.is_favorite %}
+        <button class="button button_style_none" name="favorites">
+            <span class="icon-favorite icon-favorite_active"></span></button>        
+    {% else %}
+        <button class="button button_style_none" name="favorites" data-out>
+            <span class="icon-favorite icon-favorite_big"></span></button>
+            <div class="single-card__favorite-tooltip tooltip" style="margin-top: 40px;">
+                Добавить в избранное
+            </div>
+    {% endif %}
+{% endif %}

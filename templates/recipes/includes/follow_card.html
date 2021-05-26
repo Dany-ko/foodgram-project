@@ -1,0 +1,51 @@
+{% load static %}
+{% load thumbnail %}
+{% for follower in follow %}
+    <div class="card-user" data-author="{{ follower.author.id }}">
+        <div class="card-user__header">
+            <a href="{% url 'profile' follower.author.username %}">
+                <h2 class="card-user__title">{% firstof follower.author.get_full_name follower.author.username %}</h2>
+            </a>
+        </div>
+
+        <div class="card-user__body">  
+            <ul class="card-user__items">
+                {% for recipe in follower.author.recipes.all %}
+                    {% if forloop.counter <= 3 %}
+                        <li class="card-user__item">
+                            <div class="recipe">
+                                {% thumbnail recipe.image "72x72" crop="center" upscale=True as im %}
+                                    <img src="{{ im.url }}" alt="{{ recipe.title }}" class="recipe__image">
+                                {% endthumbnail %}
+                                <a href="{% url 'recipe_detail' recipe.slug %}">
+                                    <h3 class="recipe__title">{{ recipe.title }}</h3>
+                                </a>
+                                <p class="recipe__text"><span class="icon-time"></span> {{ recipe.time_cooking }} мин.</p>
+                            </div>    
+                        </li> 
+                    {% endif %}    
+                {% endfor %}
+                <li class="card-user__item">
+                    <a href="{% url 'profile' follower.author.username %}" class="card-user__link link">
+
+                    {% if follower.author.recipes.all|length == 0 %}
+                        У пользователя нет рецептов.   
+                    {% elif follower.author.recipes.all|length < 3 %}
+                        <p></p>
+                    {% elif follower.author.recipes.all|length|add:'-3' == 1 %}
+                        Еще {{ follower.author.recipes.all|length|add:'-3' }} рецепт...
+                    {% elif follower.author.recipes.all|length|add:'-3' < 5 %}
+                        Еще {{ follower.author.recipes.all|length|add:'-3' }} рецептa...
+                    {% else %}
+                        Еще {{ follower.author.recipes.all|length|add:'-3' }} рецептов...
+                    {% endif %}
+                    </a>
+                </li>
+            </ul>  
+        </div>
+
+        <div class="card-user__footer">
+            {% include "recipes/includes/follow_buttom.html" with author=follower.author following=extra_context.following %}
+        </div>
+    </div>
+{% endfor %}

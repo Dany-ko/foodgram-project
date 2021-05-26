@@ -7,6 +7,10 @@ __pycache__/
 *.so
 
 # Distribution / packaging
+staticfiles
+cache
+media
+ingredients.csv
 .Python
 build/
 develop-eggs/

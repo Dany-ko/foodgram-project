@@ -1,0 +1,8 @@
+{% for tag in recipe.tags.all %}
+    <style>
+        a {text-decoration:none;}
+    </style>
+    <a href="{% url 'tag_detail' tag.display_name %}">
+        <span class="badge badge_{{ tag.color }}">{{ tag.title }}</span>
+    </a>
+{% endfor %}

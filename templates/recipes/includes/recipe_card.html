@@ -1,0 +1,29 @@
+<div class="card" data-id="{{ recipe.id }}">
+    {% load thumbnail %}
+    {% thumbnail recipe.image "282x240" crop="center" upscale=True as im %}
+        <img src="{{ im.url }}" alt="{{ recipe.name }}" class="card__image">
+    {% endthumbnail %}
+    <div class="card__body">
+        <a class="card__title link" href="{% url 'recipe_detail' recipe.slug %}">{{ recipe.title }}</a>
+        
+        <ul class="card__items">
+            <li class="card__item">
+                {% include "recipes/includes/tags_for_card.html" %} 
+            </li>
+        </ul>
+        
+        <div class="card__items card__items_column">
+            <p class="card__text"><span class="icon-time"></span> {{ recipe.time_cooking }} мин.</p>
+            <p class="card__text"><span class="icon-user"></span>
+                <a href="{% url 'profile' recipe.author.username %}" style="color: black">
+                    {% firstof recipe.author.get_full_name recipe.author.username %}
+                </a>
+            </p>
+        </div>
+    </div>
+    <div class="card__footer">
+        {% include 'recipes/includes/purchase_buttom.html' with recipe=recipe %}
+        {% include 'recipes/includes/favorite_buttom.html' %}
+    </div>
+</div>
+ 

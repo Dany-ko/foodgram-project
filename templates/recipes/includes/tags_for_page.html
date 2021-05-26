@@ -1,0 +1,10 @@
+<ul class="tags">
+
+    {% for tag in tags %}
+        <li class="tags__item">
+            <a id="{{ tag.id_for_label }}" class="tags__checkbox tags__checkbox_{{ tag.color }} tags__checkbox_active" href="{% url 'tag_detail' tag.display_name %}"></a>
+            <span class="tags__label">{{ tag.title }}</span>
+        </li>
+    {% endfor %}
+
+</ul>

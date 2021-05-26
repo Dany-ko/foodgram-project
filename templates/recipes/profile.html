@@ -1,0 +1,57 @@
+{% extends "recipes/base.html" %}
+{% load static %}
+
+
+{% block title %}
+        Личная страница {% firstof profile.0.author.get_full_name profile.0.author.username %}
+{% endblock %}
+
+
+{% block static_css %}
+    <link rel="stylesheet" href="{% static 'pages/index.css' %}">
+{% endblock %}
+
+{% block heading %}
+
+    <div class="main__header">
+        <h1 class="main__title">
+            {% firstof profile.0.author.get_full_name profile.0.author.username %}
+        </h1>
+        {% include "recipes/includes/tags_for_page.html" with tags=extra_context.tags %}
+    </div>
+
+    <div class="author-subscribe" data-author="{{ profile.0.author.id }}">
+        <p style="padding: 0 0 2em 0;">
+            {% include "recipes/includes/follow_buttom.html" with author=profile.0.author following=extra_context.following %}
+        </p>
+    </div>
+{% endblock %}
+
+{% block content %}
+
+    <div class="card-list">
+        {% for recipe in profile %}
+            {% include "recipes/includes/recipe_card.html" with recipe=recipe %}
+        {% endfor %}
+    </div>
+             
+    <nav class="pagination" aria-label="Search results pages">
+        {% if page_obj.has_other_pages %}
+            {% include 'recipes/includes/paginator.html' with items=page_obj paginator=paginator %}
+        {% endif %}
+    </nav>
+
+{% endblock %}
+
+
+{% block static_js %}
+    <script src="{% static 'js/components/MainCards.js' %}"></script>
+    <script src="{% static 'js/components/Purchases.js' %}"></script>
+    <script src="{% static 'js/components/Favorites.js' %}"></script>
+    <script src="{% static 'js/components/Subscribe.js' %}"></script>
+    <script src="{% static 'js/config/config.js' %}"></script>
+    <script src="{% static 'js/components/AuthorRecipe.js' %}"></script>
+    <script src="{% static 'js/components/Header.js' %}"></script>
+    <script src="{% static 'js/api/Api.js' %}"></script>
+    <script src="{% static 'authorRecipe.js' %}"></script>
+{% endblock %}

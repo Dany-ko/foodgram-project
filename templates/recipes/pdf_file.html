@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+    <head><meta charset="UTF-8"></head>
+    <body>
+
+        <h1>Ингредиенты:</h1>
+
+        {% for i in ingredients %}
+            {% for b in i.recipe.recipe_ingredients.all %}
+                <h3>
+                    {{ forloop.counter }}. {{ b.ingredient.title }} - {{ b.count }} {{ b.ingredient.unit }}<br>
+                </h3>
+            {% endfor %}
+        {% endfor %}
+
+    </body>
+</html>

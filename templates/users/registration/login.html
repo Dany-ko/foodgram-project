@@ -1,0 +1,55 @@
+{% extends "recipes/base.html" %}
+
+{% load static %}
+
+{% load user_filters %}
+
+{% block title %}Войти на сайт{% endblock %}
+
+{% block static_css %}
+  <link rel="stylesheet" href="{% static 'pages/form.css' %}">
+{% endblock %}
+
+{% block heading %}
+  <h1 class="main__title">Войти на сайт</h1>
+{% endblock %}
+
+{% block content %}
+
+  {% if next %}            
+    <div class="custom-center-block">
+      <p class="custom-text-block">
+        Вы обратились к странице, доступ к которой возможен только для залогиненных пользователей.<br>
+        Пожалуйста, авторизуйтесь.
+      </p>
+    <div class="custom-button-block">
+  {% endif %}
+
+  <div class="form-container">
+    <form class="form" method="post" action="{% url 'login' %}">  
+      {% csrf_token %}
+        <div class="form__group">
+            <label for="id_username" class="form__label">Имя</label>
+            <div class="form__field-group">
+              {{ form.username|addclass:'form__input' }}
+            </div>
+        </div>
+        <div class="form__group">
+          <label for="id_password" class="form__label">Пароль</label>
+          <div class="form__field-group">
+            {{ form.password|addclass:'form__input' }}
+            {% if form.errors %}
+              <div class="form__error">
+                Имя пользователя и пароль не совпадают. Введите правильные данные.
+              </div>
+            {% endif %}
+          </div>
+        </div>
+        <div class="form__footer">
+          <button class="button button_style_blue">Войти</button>
+          <a href="#" class="form__forgot-link">Забыли пароль?</a>
+        </div>
+    </form>
+  </div>
+
+{% endblock %}
