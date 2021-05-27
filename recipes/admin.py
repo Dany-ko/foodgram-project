@@ -42,7 +42,6 @@ class TagAdmin(admin.ModelAdmin):
     list_display = (
         'title', 'display_name',
     )
-    # prepopulated_fields = {'slug': ('title',)}
 
 
 class FollowAdmin(admin.ModelAdmin):

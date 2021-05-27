@@ -18,12 +18,14 @@
     <div class="card-list card-list_column">   
         <ul class="shopping-list">
             {% for purchase in purchases.all %}
-                <li class="shopping-list__item" data-id="111">
+                <li class="shopping-list__item" data-id="{{ purchase.recipe.id }}">
                     <div class="recipe recipe_reverse">
                         {% thumbnail purchase.recipe.image "90x90" crop="center" upscale=True as im %}
                             <img src="{{ im.url }}" alt="{{ purchase.recipe.title }}" class="recipe__image recipe__image_big">
                         {% endthumbnail %}
-                        <h3 class="recipe__title">{{ purchase.recipe.title }}</h3>
+                        <a href="{% url 'recipe_detail' purchase.recipe.slug %}">
+                            <h3 class="recipe__title">{{ purchase.recipe.title }}</h3>
+                        </a>
                         <p class="recipe__text"><span class="icon-time"></span> {{ purchase.recipe.time_cooking }} мин.</p>
                     </div>
                     {% include 'recipes/includes/purchase_buttom.html' with recipe=purchase.recipe %}

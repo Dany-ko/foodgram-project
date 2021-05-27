@@ -1,7 +1,5 @@
 from django import template
 
-# from recipes.models import Ingredient
-
 
 register = template.Library()
 

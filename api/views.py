@@ -1,6 +1,9 @@
+from django.shortcuts import get_object_or_404
+
 from rest_framework.views import APIView
-from rest_framework import status, mixins, viewsets
+from rest_framework import status, mixins, viewsets, filters
 from rest_framework.response import Response
+from rest_framework.decorators import action
 
 from api.serializer import IngredientSerializer
 from recipes.models import (
@@ -9,14 +12,10 @@ from recipes.models import (
 
 
 class GetIngredient(viewsets.GenericViewSet, mixins.ListModelMixin):
+    queryset = Ingredient.objects.all()
     serializer_class = IngredientSerializer
-
-    def get_queryset(self):
-        queryset = Ingredient.objects.all()
-        ingredient = self.request.query_params.get('query')
-        if ingredient is not None:
-            queryset = queryset.filter(title__startswith=ingredient)
-        return queryset
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('title',)
 
 
 class AddToFavorites(APIView):
@@ -24,7 +23,7 @@ class AddToFavorites(APIView):
     def post(self, request, format=None):
         Favorite.objects.get_or_create(
             user=request.user,
-            recipe_id=request.data['id'],
+            recipe_id=request.data.get('id'),
         )
         return Response(
             {'success': True},
@@ -35,7 +34,8 @@ class AddToFavorites(APIView):
 class RemoveFromFavorites(APIView):
 
     def delete(self, request, pk, format=None):
-        Favorite.objects.filter(
+        get_object_or_404(
+            Favorite,
             recipe_id=pk,
             user=request.user
         ).delete()
@@ -50,7 +50,7 @@ class AddToFollow(APIView):
     def post(self, request, format=None):
         Follow.objects.get_or_create(
             user=request.user,
-            author_id=request.data['id']
+            author_id=request.data.get('id')
         )
         return Response(
             {'success': True},
@@ -61,7 +61,8 @@ class AddToFollow(APIView):
 class RemoveFromFollow(APIView):
 
     def delete(self, request, pk, format=None):
-        Follow.objects.filter(
+        get_object_or_404(
+            Follow,
             user=request.user,
             author_id=pk
         ).delete()
@@ -76,7 +77,7 @@ class AddPurchase(APIView):
     def post(self, request, format=None):
         Purchase.objects.get_or_create(
             user=request.user,
-            recipe_id=request.data['id']
+            recipe_id=request.data.get('id')
         )
         return Response(
             {'success': True},
@@ -87,7 +88,8 @@ class AddPurchase(APIView):
 class RemovePurchase(APIView):
 
     def delete(self, request, pk, format=None):
-        Purchase.objects.filter(
+        get_object_or_404(
+            Purchase,
             recipe_id=pk,
             user=request.user
         ).delete()

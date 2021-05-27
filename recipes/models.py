@@ -27,13 +27,16 @@ class Tag(models.Model):
     display_name = models.CharField(
         max_length=20,
         verbose_name='Имя тега в шаблоне',
-        # default='Name'
     )
     color = models.CharField(
         max_length=50,
         verbose_name='Цвет тега',
-        default="Red"
+        default='Red'
     )
+
+    class Meta:
+        verbose_name = 'Тэг'
+        verbose_name_plural = 'Тэги'
 
     def __str__(self):
         return f'{self.title}'
@@ -43,13 +46,13 @@ class Ingredient(models.Model):
     title = models.CharField(max_length=254)
     unit = models.CharField(max_length=128)
 
-    def __str__(self):
-        return f'{self.title}, {self.unit}'
-
     class Meta:
         ordering = ('title', )
         verbose_name = 'Ингридиент'
         verbose_name_plural = 'Ингридиенты'
+
+    def __str__(self):
+        return f'{self.title}, {self.unit}'
 
 
 class RecipeQuerySet(models.QuerySet):
@@ -105,14 +108,13 @@ class Recipe(models.Model):
 
     objects = RecipeQuerySet.as_manager()
 
+    class Meta:
+        ordering = ('-pub_date', )
+        verbose_name = 'Рецепт'
+        verbose_name_plural = 'Рецепты'
+
     def __str__(self):
         return self.title
-
-    def text_trim(self):
-        return u"%s..." % (self.text[:50],)
-
-    def get_absolute_url(self):
-        return reverse('recipe_detail', args=[str(self.slug)])
 
     def save(self, *args, **kwargs):
         maket_ru = MAKET_RU
@@ -124,10 +126,11 @@ class Recipe(models.Model):
                 )))
         return super(Recipe, self).save(*args, **kwargs)
 
-    class Meta:
-        ordering = ('-pub_date', )
-        verbose_name = 'Рецепт'
-        verbose_name_plural = 'Рецепты'
+    def get_absolute_url(self):
+        return reverse('recipe_detail', args=[str(self.slug)])
+
+    def text_trim(self):
+        return self.text[:50]
 
 
 class RecipeIngredient(models.Model):
@@ -147,12 +150,12 @@ class RecipeIngredient(models.Model):
         verbose_name='Количество',
     )
 
-    def __str__(self):
-        return f'{self.ingredient} в {self.recipe}'
-
     class Meta:
         verbose_name = 'Ингредиент в рецепте'
         verbose_name_plural = 'Ингредиенты в рецептах'
+
+    def __str__(self):
+        return f'{self.ingredient} в {self.recipe}'
 
 
 class TagRecipe(models.Model):
@@ -178,27 +181,18 @@ class Follow(models.Model):
         verbose_name='Автор публикации'
     )
 
-    def __str__(self):
-        return f'{self.user} подписан на автора {self.author} '
-
-    def clean(self):
-        if self.user == self.author:
-            raise ValidationError(
-                '''
-                Пользователь не может
-                подписываться на самого себя
-                '''
-            )
-
     class Meta:
         verbose_name = 'Подписки'
         verbose_name_plural = 'Подписки'
-        constraints = [
+        constraints = (
             models.UniqueConstraint(
                 fields=('user', 'author'),
                 name='unique_follow_user_author'
-            )
-        ]
+            ),
+        )
+
+    def __str__(self):
+        return f'{self.user} подписан на автора {self.author} '
 
 
 class Favorite(models.Model):
@@ -215,18 +209,18 @@ class Favorite(models.Model):
         verbose_name='Рецепт'
     )
 
-    def __str__(self):
-        return f'Избранный {self.recipe} у {self.user}'
-
     class Meta:
-        constraints = [
+        constraints = (
             models.UniqueConstraint(
                 fields=('user', 'recipe'),
                 name='unique_favorite_user_recipe'
-            )
-        ]
+            ),
+        )
         verbose_name = 'Объект избранного'
         verbose_name_plural = 'Объекты избранного'
+
+    def __str__(self):
+        return f'Избранный {self.recipe} у {self.user}'
 
 
 class Purchase(models.Model):
@@ -242,16 +236,21 @@ class Purchase(models.Model):
         related_name='purchases',
         verbose_name='Рецепт'
     )
-
-    def __str__(self):
-        return f'Выбранный рецепт {self.recipe} в покупках у {self.user}'
+    date_create = models.DateTimeField(
+        verbose_name='Дата создания',
+        auto_now_add=True, null=True, blank=True
+    )
 
     class Meta:
-        constraints = [
+        constraints = (
             models.UniqueConstraint(
                 fields=('user', 'recipe'),
                 name='unique_purchases_user_recipe'
-            )
-        ]
+            ),
+        )
         verbose_name = 'Объект покупок'
         verbose_name_plural = 'Объекты покупок'
+        ordering = ('-date_create',)
+
+    def __str__(self):
+        return f'Выбранный рецепт {self.recipe} в покупках у {self.user}'

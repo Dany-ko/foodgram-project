@@ -55,10 +55,6 @@ class BaseRecipeListView(ListView, IsFavoriteMixin):
         return context
 
     def _get_page_title(self):
-        assert (
-            self.page_title,
-            f"Attribute 'page_title' not set for {self.__class__.__name__}"
-        )
         return self.page_title
 
 
@@ -284,7 +280,6 @@ def recipe_edit(request, slug):
             request,
             'recipes/recipe_create.html',
             context,
-            print(form.errors)
         )
     recipe = form.save(commit=False)
     recipe.save()

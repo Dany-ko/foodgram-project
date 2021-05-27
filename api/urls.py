@@ -3,9 +3,10 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
 from api.views import (
-    GetIngredient, AddToFavorites, RemoveFromFavorites,
-    AddToFollow, RemoveFromFollow, AddPurchase,
-    RemovePurchase
+    GetIngredient, AddToFavorites,
+    RemoveFromFavorites,
+    AddToFollow, RemoveFromFollow,
+    AddPurchase, RemovePurchase
 )
 
 

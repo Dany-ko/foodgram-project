@@ -8,7 +8,7 @@
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>{% block title %}Продуктовый помощник{% endblock %} | Foodgram</title>
-        {% block static_css %}<!-- Статичные файлы формата .css  -->{% endblock %}
+        {% block static_css %}{% endblock %}
     </head>
 
     <body>
@@ -16,18 +16,13 @@
         {% include "recipes/includes/header.html" %} 
 
             <main class="main container">
-                {% block heading %}Продуктовый помощник - Foodgram{% endblock %} <!-- Название страницы -->
-                {% block content %}
-                <!-- Содержимое страницы -->
-                {% endblock %}
+                {% block heading %}Продуктовый помощник - Foodgram{% endblock %}
+                {% block content %}{% endblock %}
             </main>
 
         {% include "recipes/includes/footer.html" %} 
 
-        {% block static_js %}
-        <!-- Статичные файлы формата .js -->
-        {% endblock %}
+        {% block static_js %}{% endblock %}
 
     </body>
-
 </html>
