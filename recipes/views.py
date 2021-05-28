@@ -8,6 +8,9 @@ from django.http import FileResponse
 import io
 import pdfkit
 
+from foodgram_project.settings import (
+    RECIPES_NUMBERS_PER_PAGE as NUM
+)
 from recipes.forms import RecipeForm
 from recipes.models import (
     Recipe, Tag, User, Follow,
@@ -46,7 +49,7 @@ class IsFavoriteMixin:
 class BaseRecipeListView(ListView, IsFavoriteMixin):
     context_object_name = 'recipe_list'
     queryset = Recipe.objects.all()
-    paginate_by = 6
+    paginate_by = NUM
     page_title = None
 
     def get_context_data(self, **kwargs):
@@ -135,7 +138,6 @@ class ProfileListView(BaseRecipeListView, LoginRequiredMixin):
     template_name = 'recipes/profile.html'
     extra_context = None
     context_object_name = 'profile'
-    paginate_by = 6
 
     def get_context_data(self, **kwargs):
         author = get_object_or_404(
@@ -176,7 +178,7 @@ class FollowView(LoginRequiredMixin, ListView):
     template_name = 'recipes/follow.html'
     context_object_name = 'follow'
     extra_context = {'recipe': Recipe.objects.all()}
-    paginate_by = 6
+    paginate_by = NUM
 
     def get(self, request, *args, **kwargs):
         self.user = get_object_or_404(
