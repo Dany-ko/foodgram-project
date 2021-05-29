@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404
 
 from rest_framework.views import APIView
-from rest_framework import status, mixins, viewsets, filters
+from rest_framework import status, mixins, viewsets, filters, permissions
 from rest_framework.response import Response
 
 from api.serializer import IngredientSerializer
@@ -18,6 +18,7 @@ class GetIngredient(viewsets.GenericViewSet, mixins.ListModelMixin):
 
 
 class AddToFavorites(APIView):
+    permission_classes = (permissions.IsAuthenticated,)
 
     def post(self, request, format=None):
         Favorite.objects.get_or_create(
@@ -31,6 +32,7 @@ class AddToFavorites(APIView):
 
 
 class RemoveFromFavorites(APIView):
+    permission_classes = (permissions.IsAuthenticated,)
 
     def delete(self, request, pk, format=None):
         get_object_or_404(
@@ -45,6 +47,7 @@ class RemoveFromFavorites(APIView):
 
 
 class AddToFollow(APIView):
+    permission_classes = (permissions.IsAuthenticated,)
 
     def post(self, request, format=None):
         Follow.objects.get_or_create(
@@ -58,6 +61,7 @@ class AddToFollow(APIView):
 
 
 class RemoveFromFollow(APIView):
+    permission_classes = (permissions.IsAuthenticated,)
 
     def delete(self, request, pk, format=None):
         get_object_or_404(
@@ -72,6 +76,7 @@ class RemoveFromFollow(APIView):
 
 
 class AddPurchase(APIView):
+    permission_classes = (permissions.IsAuthenticated,)
 
     def post(self, request, format=None):
         Purchase.objects.get_or_create(
@@ -85,6 +90,7 @@ class AddPurchase(APIView):
 
 
 class RemovePurchase(APIView):
+    permission_classes = (permissions.IsAuthenticated,)
 
     def delete(self, request, pk, format=None):
         get_object_or_404(

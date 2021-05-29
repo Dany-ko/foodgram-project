@@ -1,8 +1,8 @@
 from django.contrib import admin
-# from django import forms
+
 from recipes.models import (
     Recipe, Ingredient, RecipeIngredient, Tag,
-    TagRecipe, Follow, Favorite, User, Purchase
+    TagRecipe, Follow, Favorite, Purchase
 )
 
 

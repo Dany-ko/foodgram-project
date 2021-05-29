@@ -8,8 +8,7 @@ __pycache__/
 
 # Distribution / packaging
 data.json
-static/
-staticfiles
+static
 cache
 media
 ingredients.csv

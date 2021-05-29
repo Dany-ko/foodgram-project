@@ -34,7 +34,14 @@
             <div class="single-card__items single-card__items_column">
                 <p class="single-card__text"><span class="icon-time"></span> {{ recipe.time_cooking }} мин.</p>
                 <ul class="single-card__items">
-                    <li class="single-card__item"><p class="single-card__text"><span class="icon-user"></span>{% firstof recipe.author.get_full_name recipe.author.username %}</p></li>
+                    <li class="single-card__item">
+                        <p class="single-card__text">
+                            <span class="icon-user"></span>
+                            <a href="{% url 'profile' recipe.author.username %}">
+                                {% firstof recipe.author.get_full_name recipe.author.username %}
+                            </a>
+                        </p>
+                    </li>
                     {% if user == recipe.author %}
                         <li class="single-card__item">
                             <a style="margin-left: 2.5em" href="{% url 'recipe_edit' recipe.slug %}" class="single-card__text">
@@ -45,7 +52,9 @@
                 </ul>
             </div>
             <ul class="single-card__items">
-                <li class="single-card__item"><button class="button button_style_blue" name="purchases" data-out><span class="icon-plus"></span> Добавить в покупки</button></li>
+                <li class="single-card__item">
+                    {% include 'recipes/includes/purchase_buttom.html' with recipe=recipe %}
+                </li>
                 <li class="single-card__item">
                     {% include 'recipes/includes/follow_buttom.html' with author=recipe.author %}
                 </li>

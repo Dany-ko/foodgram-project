@@ -110,7 +110,7 @@ class TagDetailView(DetailView):
 
 class TagListView(ListView):
     template_name = 'recipes/includes/tag_list.html'
-    paginate_by = 6
+    paginate_by = NUM
     context_object_name = 'tag'
     extra_context = None
 

@@ -123,7 +123,9 @@ class Recipe(models.Model):
             self.title.translate(
                 str.maketrans(
                     maket_ru, maket_en
-                )))
+                )
+            )
+        )
         return super(Recipe, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
