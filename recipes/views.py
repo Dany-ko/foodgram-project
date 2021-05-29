@@ -300,5 +300,20 @@ def recipe_edit(request, slug):
     form.save_m2m()
     return redirect(
         'recipe_detail',
-        slug=slug
+        slug=recipe.slug
+    )
+
+
+def page_not_found(request, exception):
+    return render(
+        request, 'misc/404.html',
+        {'path': request.path},
+        status=404
+    )
+
+
+def server_error(request):
+    return render(
+        request, 'misc/500.html',
+        status=500
     )

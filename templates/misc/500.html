@@ -1,0 +1,32 @@
+{% extends "recipes/base.html" %}
+{% load static %}
+{% block title %}Ошибка 500{% endblock %}
+
+{% block static_css %}
+    <link rel="stylesheet" href="{% static 'pages/index.css' %}">
+{% endblock %}
+
+{% block heading %}{% endblock %}
+
+{% block content %}
+
+    <div class="single-card">
+            <img src="{% static 'images\errors\500.png' %}" width="480" height="480" alt="errors" class="card__image">
+        <div class="single-card__info">
+            <div class="single-card__header-info">
+                <h1 class="single-card__title">Ошибка 500</h1>
+            </div>
+            <div class="single-card__section">
+                <p class=" single-card__section-text">
+                    На сервере произошла непредвиденная ошибка. Пожалуйста, подождите, она скоро будет исправлена.
+                </p>
+                <p class=" single-card__section-text">
+                    Попробуйте <a href="{% url  'index' %}">вернуться на главную</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block static_js %}{% endblock %}
