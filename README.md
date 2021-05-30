@@ -16,14 +16,14 @@
 
 ### Значения Базы Данных
 
-| RU NAME | KEY | VALUE |
-| ------ | ------ | ------ |
-| База данных | DB_ENGINE | django.db.backends.postgresql |
-| Имя базы данных | DB_NAME | postgres |
-| Логин для подключения к базе данных | POSTGRES_USER | postgres |
-| Пароль для подключения к БД | POSTGRES_PASSWORD | postgres |
-| Название сервиса (контейнера) | DB_HOST | db |
-| Порт для подключения к БД | DB_PORT | 5432 |
+| RU NAME | KEY |
+| ------ | ------ |
+| База данных | DB_ENGINE |
+| Имя базы данных | DB_NAME |
+| Логин для подключения к базе данных | POSTGRES_USER |
+| Пароль для подключения к БД | POSTGRES_PASSWORD |
+| Название сервиса (контейнера) | DB_HOST |
+| Порт для подключения к БД | DB_PORT |
 
 
 ### Запуск проекта
