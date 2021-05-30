@@ -1,8 +1,9 @@
-from django.core.management.base import BaseCommand, CommandError
-from recipes.models import Ingredient
-import csv
-from foodgram_project.settings import BASE_DIR
 import os
+import csv
+from django.core.management.base import BaseCommand
+
+from recipes.models import Ingredient
+from foodgram_project.settings import BASE_DIR
 
 
 CSV_FILE_PATH = os.path.join(BASE_DIR, 'ingredients.csv')

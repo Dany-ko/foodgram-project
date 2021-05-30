@@ -69,7 +69,7 @@ class RecipeQuerySet(models.QuerySet):
 class Recipe(models.Model):
     title = models.CharField(
         max_length=254, verbose_name='Название рецепта'
-        )
+    )
     author = models.ForeignKey(
         User, on_delete=models.CASCADE,
         verbose_name='Автор',
