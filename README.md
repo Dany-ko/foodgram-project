@@ -46,13 +46,15 @@ docker-compose exec web python manage.py collectstatic --no-input
 ```
 - Проект доступен по адресу:
 ```
-[http://127.0.0.1/](http://127.0.0.1/)
+[www.foodgramm.tk](http://foodgramm.tk/)
 ```
 - Адрес админ панели:
 ```
-[http://127.0.0.1/admin/](http://127.0.0.1/admin/)
+[www.foodgramm.tk/admin](http://foodgramm.tk/admin)
+```
 
 ### Автор
-Данила
+
+## Данила
 Mail - dankol@mail.ru
 GitHub - [GitHub/Dany-ko](https://github.com/Dany-ko)
