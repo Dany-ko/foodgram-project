@@ -20,4 +20,4 @@ jobs:
         pip install -r requirements.txt 
 
     - name: Test with flake8
-      run: flake8 . --exclude api/migrations,recipes/migrations,users/migrations,foodgram_project/settings.py,manage.py,foodgram_project/urls.py,users/views.py,recipes/management/commands/load_ingredients.py,recipes/urls.py,api/views.py,api/urls.py,recipes/admin.py,recipes/models.py,recipes/views.py,users/forms.py
+      run: flake8 .
