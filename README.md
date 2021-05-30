@@ -56,8 +56,6 @@ docker-compose exec web python manage.py collectstatic --no-input
 ### Автор
 
 ## Данила
-```
-Mail - dankol@mail.ru
-```
-GitHub - [GitHub/Dany-ko](https://github.com/Dany-ko)
-```
+
+> Mail - dankol@mail.ru
+> GitHub - [GitHub/Dany-ko](https://github.com/Dany-ko)
