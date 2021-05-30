@@ -50,6 +50,7 @@ services:
     networks:
         nginx_net:
             name: nginx_net
+            external: true
 
 volumes:
     postgres_data:
