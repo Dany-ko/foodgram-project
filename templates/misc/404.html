@@ -3,7 +3,7 @@
 {% block title %}Ошибка 404{% endblock %}
 
 {% block static_css %}
-    <link rel="stylesheet" href="{% static 'pages/index.css' %}">
+    <link rel="stylesheet" href="{% static 'pages/single.css' %}">
 {% endblock %}
 
 {% block heading %}{% endblock %}
@@ -11,7 +11,7 @@
 {% block content %}
 
     <div class="single-card">
-            <img src="{% static 'images\errors\404.png' %}" width="480" height="480" alt="errors" class="card__image">
+        <img src="{% static 'images\errors\404.png' %}" style="width:660px;height:480px;" alt="errors" class="single-card__image">
         <div class="single-card__info">
             <div class="single-card__header-info">
                 <h1 class="single-card__title">Ошибка 404</h1>

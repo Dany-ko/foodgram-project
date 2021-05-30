@@ -14,12 +14,11 @@ handler404 = 'recipes.views.page_not_found'  # noqa
 handler500 = 'recipes.views.server_error'  # noqa
 
 urlpatterns = [
+    path('', include('recipes.urls')),
     path('auth/', include('users.urls')),
-    path('auth/', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
     path('misc/404/', page_not_found, name='page_not_found'),
     path('misc/500/', server_error, name='server_error'),
-    path('', include('recipes.urls')),
 ]
 
 if settings.DEBUG:
