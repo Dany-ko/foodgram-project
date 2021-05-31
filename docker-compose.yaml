@@ -9,7 +9,7 @@ services:
       - ./foodgram_project/.env
 
   web:
-    build: .
+    image: dany83/foodgram
     restart: always
     command: gunicorn foodgram_project.wsgi:application --bind 0.0.0.0:8000
     ports:
