@@ -30,7 +30,7 @@
 
 - Запустите контейнеры
 ```sh
-docker-compose up
+docker-compose up -d
 ``` 
 - Запустить миграции
 ```sh
@@ -46,11 +46,11 @@ docker-compose exec web python manage.py collectstatic --no-input
 ```
 - Проект доступен по адресу:
 ```
-[www.foodgramm.tk](http://foodgramm.tk/)
+[127.0.0.1](http://127.0.0.1/)
 ```
 - Адрес админ панели:
 ```
-[www.foodgramm.tk/admin](http://foodgramm.tk/admin)
+[127.0.0.1/admin](http://127.0.0.1/admin)
 ```
 
 ### Автор

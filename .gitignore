@@ -10,6 +10,7 @@ __pycache__/
 data.json
 static
 dump.json
+.github/workflows/main copy.yml
 cache
 media
 ingredients.csv

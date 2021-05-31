@@ -26,6 +26,7 @@ class Tag(models.Model):
     display_name = models.CharField(
         max_length=20,
         verbose_name='Имя тега в шаблоне',
+        default='name_tag'
     )
     color = models.CharField(
         max_length=50,
