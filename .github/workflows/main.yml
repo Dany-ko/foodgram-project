@@ -54,5 +54,6 @@ jobs:
         script: |
           cd foodgram_project
           sudo docker pull ${{ secrets.DOCKER_USERNAME }}/foodgram:latest
-          sudo docker stop $(sudo docker ps -a -q)
-          sudo docker run --rm -d -p 8000:8000 ${{ secrets.DOCKER_USERNAME }}/foodgram:latest
+          sudo docker-compose stop
+          sudo docker-compose rm web
+          sudo docker-compose up --build -d
