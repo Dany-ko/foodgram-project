@@ -9,5 +9,4 @@ RUN tar vxf wkhtmltox-0.12.3_linux-generic-amd64.tar.xz
 RUN cp wkhtmltox/bin/wk* /usr/local/bin/
 COPY . /code
 WORKDIR /code
-EXPOSE 8000
 CMD gunicorn foodgram_project.wsgi:application --bind 0.0.0.0:8000
