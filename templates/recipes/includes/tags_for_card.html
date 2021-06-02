@@ -1,8 +1,10 @@
+{% load recipe_filters %}
+
 {% for tag in recipe.tags.all %}
     <style>
         a {text-decoration:none;}
     </style>
-    <a href="{% url 'tag_detail' tag.display_name %}">
+    <a href="?{{ request|tag_link:tag }}">
         <span class="badge badge_{{ tag.color }}">{{ tag.title }}</span>
     </a>
 {% endfor %}

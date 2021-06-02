@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.template.loader import render_to_string
 from django.http import FileResponse
+from django.views.generic.base import TemplateView
 
 import io
 import pdfkit
@@ -17,6 +18,14 @@ from recipes.models import (
     RecipeIngredient,
     Ingredient, Purchase
 )
+
+
+class AboutPage(TemplateView):
+    template_name = 'stat/about.html'
+
+
+class TechPage(TemplateView):
+    template_name = 'stat/technology.html'
 
 
 def generate_pdf(request):
@@ -59,6 +68,13 @@ class BaseRecipeListView(ListView, IsFavoriteMixin):
 
     def _get_page_title(self):
         return self.page_title
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        tags = self.request.GET.getlist("tag")
+        if tags:
+            qs = qs.filter(tags__display_name__in=tags).distinct()
+        return qs
 
 
 class IndexView(BaseRecipeListView):
@@ -106,32 +122,6 @@ class TagDetailView(DetailView):
     queryset = Tag.objects.all()
     page_title = 'Тэги'
     template_name = 'recipes/includes/tags_for_page.html'
-
-
-class TagListView(ListView):
-    template_name = 'recipes/includes/tag_list.html'
-    paginate_by = NUM
-    context_object_name = 'tag'
-    extra_context = None
-
-    def _get_tag(self, *args, **kwargs):
-        tag = get_object_or_404(
-            Tag, display_name=self.kwargs.get('display_name')
-        )
-        return tag
-
-    def get_context_data(self, **kwargs):
-        kwargs.update({
-            'extra_context': {
-                'tags': Tag.objects.all(),
-                'tag_name': self._get_tag
-            },
-        })
-        context = super().get_context_data(**kwargs)
-        return context
-
-    def get_queryset(self):
-        return self._get_tag().recipes.all()
 
 
 class ProfileListView(BaseRecipeListView, LoginRequiredMixin):

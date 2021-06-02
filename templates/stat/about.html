@@ -1,0 +1,32 @@
+{% extends "recipes/base.html" %}
+{% load static %}
+{% block title %}Об авторе{% endblock %}
+
+{% block static_css %}
+    <link rel="stylesheet" href="{% static 'pages/single.css' %}">
+{% endblock %}
+
+{% block heading %}{% endblock %}
+
+{% block content %}
+
+    <div class="single-card">
+        <img src="{% static 'images/stat/programmist.jpg' %}" style="width:660px;height:480px;" alt="errors" class="single-card__image">
+        <div class="single-card__info">
+            <div class="single-card__header-info">
+                <h1 class="single-card__title">Об авторе</h1>
+            </div>
+            <div class="single-card__section">
+                <p class=" single-card__section-text">
+                    Эта страница об авторе, но автор о себе ничего не рассказал.  
+                </p>
+                <p class=" single-card__section-text">
+                    Лучше наслаждайтесь <a href="{% url  'index' %}">рецептами</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block static_js %}{% endblock %}

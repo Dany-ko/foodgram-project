@@ -11,13 +11,14 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 # import environ
+import environ
 from pathlib import Path
 import os
 from dotenv import load_dotenv
 
 load_dotenv()
-# env = environ.Env()
-# environ.Env.read_env()
+env = environ.Env()
+environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,7 +32,12 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', '0') == '1'
 
-ALLOWED_HOSTS = ['*', '84.252.135.25']
+ALLOWED_HOSTS = [
+    # 'localhost',
+    '*',
+    '84.252.135.25',
+    # 'foodgramm.tk', 'www.foodgramm.tk'
+]
 
 # Application definition
 
@@ -100,7 +106,6 @@ DATABASES = {
         'HOST': os.environ.get('DB_HOST'),
         'PORT': os.environ.get('DB_PORT'),
     }
-    # 'default': env.db(),
 }
 
 

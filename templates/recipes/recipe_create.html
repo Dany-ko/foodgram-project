@@ -42,11 +42,11 @@
             <div class="form__field-group">
                 <div class="tags">
                     {% for tag in form.fields.tags.choices.queryset %}
-                    <div class="tags__item">
-                        <input type="checkbox" name="tags" value="{{ tag.id }}" id="id_{{ tag.display_name }}"
-                            class="tags__checkbox tags__checkbox_{{ tag.color }}" checked>
-                        <label for="id_tags_{{ tag.id }}" class="tags__label">{{ tag.title }}</label>
-                    </div>
+                        <div class="tags__item">
+                            <input type="checkbox" name="tags" value="{{ tag.id }}" id="id_{{ tag.display_name }}"
+                                class="tags__checkbox tags__checkbox_{{ tag.color }}" checked>
+                            <label for="id_tags_{{ tag.id }}" class="tags__label">{{ tag.title }}</label>
+                        </div>
                     {% endfor %}
                 </div>
                 <span class="form__error"></span>
@@ -61,7 +61,7 @@
                         <div class="form__dropdown-items"></div>
                     </div>
                     <input type="number" id="cantidad" class="form__input" min="0">
-                    <label for="cantidad" class="form__label" id="cantidadVal">шт.</label>
+                    <label for="cantidad" class="form__label" id="cantidadVal">шт</label>
                 </div>
                 <div class="form__field-group-ingredientes-container">
                 </div>

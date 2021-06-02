@@ -1,3 +1,5 @@
+{% load recipe_filters %}
+
 <ul class="pagination__container">
     {% if items.has_previous %}
         <li class="pagination__item"><a class="pagination__link link" href="?page={{ items.previous_page_number }}"><span class="icon-left"></span></a></li>

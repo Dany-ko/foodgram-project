@@ -32,7 +32,13 @@
                 </li>
             {% endfor %}
         </ul>
-        <a href="{% url 'generate_pdf' %}"><button class="button button_style_blue">Скачать список</button></a>
+        {% if purchases|length == 0 %}
+            <h3>Ваш список покупок пуст!</h3>
+        {% else %}
+            <a href="{% url 'generate_pdf' %}">
+                <button class="button button_style_blue">Скачать список</button>
+            </a>
+        {% endif %}
     </div>
 
 {% endblock %}

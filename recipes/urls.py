@@ -26,11 +26,6 @@ urlpatterns = [
         name='tags_for_page'
     ),
     path(
-        'tag_list/<str:display_name>/',
-        views.TagListView.as_view(),
-        name='tag_detail'
-    ),
-    path(
         'profile/<str:username>/',
         views.ProfileListView.as_view(),
         name='profile'
@@ -56,4 +51,6 @@ urlpatterns = [
         name='generate_pdf'
     ),
     path('api/', include('api.urls')),
+    path('about/', views.AboutPage.as_view(), name='about'),
+    path('tech/', views.TechPage.as_view(), name='tech'),
 ]

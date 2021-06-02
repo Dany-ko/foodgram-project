@@ -1,4 +1,5 @@
 from django.shortcuts import get_object_or_404
+
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import (
@@ -13,6 +14,7 @@ from recipes.models import (
 
 class GetIngredient(viewsets.GenericViewSet, mixins.ListModelMixin):
     queryset = Ingredient.objects.all()
+    permission_classes = (permissions.IsAuthenticated,)
     serializer_class = IngredientSerializer
     filter_backends = (filters.SearchFilter,)
     search_fields = ('title',)

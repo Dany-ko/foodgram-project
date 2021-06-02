@@ -10,16 +10,20 @@
 {% block heading %}
 
     <div class="main__header">
-        <h1 class="main__title">{{ page_title }}</h1>
+        <h1 class="main__title">Мои подписки</h1>
     </div>
 
 {% endblock %}
 
 {% block content %}
 
-    <div class="card-list">
-        {% include 'recipes/includes/follow_card.html' %}
-    </div>
+    {% if follow|length == 0 %}
+        <h3>Ваш список подписок пуст!</h3>
+    {% else %}
+        <div class="card-list">
+            {% include 'recipes/includes/follow_card.html' %}
+        </div>
+    {% endif %}
              
     <nav class="pagination" aria-label="Search results pages">
         {% if page_obj.has_other_pages %}
