@@ -9,7 +9,6 @@ __pycache__/
 # Distribution / packaging
 data.json
 static
-dump.json
 .github/workflows/main copy.yml
 no_need/
 cache
