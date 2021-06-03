@@ -1,4 +1,4 @@
-version: '2.2'
+version: '3.8'
 
 services:
   db:
@@ -9,7 +9,7 @@ services:
       - ./foodgram_project/.env
 
   web:
-    build: .
+    image: dany83/foodgram:latest
     restart: always
     volumes:
       - static_value:/code/static/

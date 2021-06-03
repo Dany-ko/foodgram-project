@@ -46,11 +46,11 @@ docker-compose exec web python manage.py collectstatic --no-input
 ```
 - Проект доступен по адресу:
 ```
-[127.0.0.1](http://127.0.0.1/)
+[84.201.169.6](http://84.201.169.6/)
 ```
 - Адрес админ панели:
 ```
-[127.0.0.1/admin](http://127.0.0.1/admin)
+[84.201.169.6/admin](http://84.201.169.6/admin)
 ```
 
 ### Автор
