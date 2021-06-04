@@ -47,6 +47,7 @@ docker-compose exec web python manage.py collectstatic --no-input
 - Проект доступен по адресу:
 ```
 [84.201.169.6](http://84.201.169.6/)
+[http://foodgramm.tk/](http://foodgramm.tk/)
 ```
 - Адрес админ панели:
 ```
