@@ -43,8 +43,14 @@ class Tag(models.Model):
 
 
 class Ingredient(models.Model):
-    title = models.CharField(max_length=254)
-    unit = models.CharField(max_length=128)
+    title = models.CharField(
+        max_length=254,
+        verbose_name='Название ингредиента',
+    )
+    unit = models.CharField(
+        max_length=128,
+        verbose_name='Единица измерения'
+    )
 
     class Meta:
         ordering = ('title', )
@@ -161,8 +167,16 @@ class RecipeIngredient(models.Model):
 
 
 class TagRecipe(models.Model):
-    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
-    tag = models.ForeignKey(Tag, on_delete=models.CASCADE)
+    recipe = models.ForeignKey(
+        Recipe,
+        on_delete=models.CASCADE,
+        verbose_name='Рецепт'
+    )
+    tag = models.ForeignKey(
+        Tag,
+        on_delete=models.CASCADE,
+        verbose_name='Тэг'
+    )
 
     class Meta:
         verbose_name = 'Тэг в рецепте'

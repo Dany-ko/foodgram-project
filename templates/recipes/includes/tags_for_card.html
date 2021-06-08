@@ -4,7 +4,5 @@
     <style>
         a {text-decoration:none;}
     </style>
-    <a href="?{{ request|tag_link:tag }}">
-        <span class="badge badge_{{ tag.color }}">{{ tag.title }}</span>
-    </a>
+    <span class="badge badge_{{ tag.color }}">{{ tag.title }}</span>
 {% endfor %}

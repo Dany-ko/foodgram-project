@@ -4,6 +4,7 @@ from recipes.models import Recipe
 
 
 class RecipeForm(forms.ModelForm):
+
     class Meta:
         model = Recipe
         fields = (
@@ -19,4 +20,19 @@ class RecipeForm(forms.ModelForm):
         }
         widgets = {
             'tags': forms.CheckboxSelectMultiple(),
+            # 'ingredient': forms.TextInput(
+            #     attrs={
+            #         'id': 'nameIngredient',
+            #         'class': 'form__input',
+            #         'required': False
+            #     }
+            # )
         }
+
+    # def save(self, commit=True):
+    #     if not commit:
+    #         raise NotImplementedError(
+    #             "Can't create Recipe without database save"
+    #         )
+    #     recipe = super().save(commit=False)
+    #     return recipe

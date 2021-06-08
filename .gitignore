@@ -9,6 +9,7 @@ __pycache__/
 # Distribution / packaging
 data.json
 static
+templates/recipes/recipe_create copy.html
 .github/workflows/main copy.yml
 no_need/
 cache

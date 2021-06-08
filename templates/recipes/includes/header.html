@@ -14,6 +14,10 @@
                     </ul>
                 {% endwith %}
                 <ul class="nav__items list">
+                    <!-- <li class="nav__item">Пользователь: <a href="{% url 'profile' user.username %}" class="nav__link link">{% firstof user.get_full_name user.username %}</a></li> -->
+                    {% if user.is_superuser %}
+                        <li class="nav__item"><a href="{% url 'admin:index' %}" class="nav__link link">Админ панель</a></li>
+                    {% endif %}
                     <li class="nav__item"><a href="{% url 'password_change' %}" class="nav__link link">Изменить пароль</a></li>
                     <li class="nav__item"><a href="{% url 'logout' %}" class="nav__link link">Выход</a></li>
                 </ul>

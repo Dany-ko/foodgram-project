@@ -1,3 +1,4 @@
+from django import forms
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.decorators import login_required
@@ -236,6 +237,11 @@ def recipe_create(request):
     RecipeIngredient.objects.filter(recipe=recipe).delete()
     objs = []
     for title, count in ingredients.items():
+        # if title == '':
+        #     raise forms.ValidationError(
+        #         'А кто поле будет заполнять, Пушкин?',
+        #         params={'title': title},
+        #     )
         ingredient = get_object_or_404(Ingredient, title=title)
         objs.append(RecipeIngredient(
             recipe=recipe,

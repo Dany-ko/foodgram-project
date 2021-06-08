@@ -10,6 +10,8 @@ class PurchaseAdmin(admin.ModelAdmin):
     list_display = (
         'id', 'user', 'recipe'
     )
+    search_fields = ('user', 'recipe', )
+    list_filter = ('user',)
 
 
 class IngredientInline(admin.TabularInline):
@@ -20,6 +22,12 @@ class IngredientInline(admin.TabularInline):
 class TagInline(admin.TabularInline):
     model = TagRecipe
     extra = 1
+
+
+class IngredientAdmin(admin.ModelAdmin):
+    list_display = ('title', 'unit')
+    search_fields = ('title', 'unit', )
+    list_filter = ('unit', )
 
 
 class RecipeAdmin(admin.ModelAdmin):
@@ -35,32 +43,35 @@ class RecipeAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
     search_fields = ('slug', 'tags', )
     empty_value_display = '-пусто-'
-    list_filter = ('pub_date', 'author', 'tags')
+    list_filter = ('pub_date', 'tags')
 
 
 class TagAdmin(admin.ModelAdmin):
     list_display = (
         'title', 'display_name',
     )
+    list_filter = ('title',)
 
 
 class FollowAdmin(admin.ModelAdmin):
     list_display = (
         'id', 'author', 'user'
     )
+    search_fields = ('author', 'user')
 
 
 class FavoriteAdmin(admin.ModelAdmin):
     list_display = (
         'user', 'recipe'
     )
+    search_fields = ('recipe', 'user')
 
 
 admin.site.register(Recipe, RecipeAdmin)
-admin.site.register(Ingredient)
-admin.site.register(RecipeIngredient)
+admin.site.register(Ingredient, IngredientAdmin)
+# admin.site.register(RecipeIngredient)
 admin.site.register(Tag, TagAdmin)
-admin.site.register(TagRecipe)
+# admin.site.register(TagRecipe)
 admin.site.register(Follow, FollowAdmin)
 admin.site.register(Favorite, FavoriteAdmin)
 admin.site.register(Purchase, PurchaseAdmin)

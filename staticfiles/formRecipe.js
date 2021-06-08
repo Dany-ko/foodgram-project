@@ -48,6 +48,14 @@ function Ingredients() {
             ingredientsContainer.appendChild(elem);
         }
     };
+
+
+    // var classesArray = document.getElementsByClassName("form__field-item-ingredient");
+    //     if(classesArray.length == 0){
+    //         alert('Не найден');
+    //     }
+
+
     // удаление элемента
 
     const eventDelete = (e) => {

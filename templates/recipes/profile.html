@@ -22,7 +22,13 @@
 
     <div class="author-subscribe" data-author="{{ profile.0.author.id }}">
         <p style="padding: 0 0 2em 0;">
-            {% include "recipes/includes/follow_buttom.html" with author=profile.0.author following=extra_context.following %}
+            {% if user.is_authenticated %}
+                {% if user == profile.0.author %}
+                
+                {% else %}
+                    {% include "recipes/includes/follow_buttom.html" with author=profile.0.author following=extra_context.following %}
+                {% endif %}
+            {% endif %}
         </p>
     </div>
 {% endblock %}

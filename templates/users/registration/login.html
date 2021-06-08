@@ -28,6 +28,11 @@
   <div class="form-container">
     <form class="form" method="post" action="{% url 'login' %}">  
       {% csrf_token %}
+      {% for field_error, text_error in form.errors.items %}
+        <div class="form__error">
+            <h3>{{ text_error }}</h3><br>
+        </div>
+      {% endfor %}
         <div class="form__group">
             <label for="id_username" class="form__label">Имя</label>
             <div class="form__field-group">
@@ -38,11 +43,6 @@
           <label for="id_password" class="form__label">Пароль</label>
           <div class="form__field-group">
             {{ form.password|addclass:'form__input' }}
-            {% if form.errors %}
-              <div class="form__error">
-                Имя пользователя и пароль не совпадают. Введите правильные данные.
-              </div>
-            {% endif %}
           </div>
         </div>
         <div class="form__footer">
