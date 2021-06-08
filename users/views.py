@@ -17,7 +17,7 @@ class SignUp(CreateView):
 
     def form_valid(self, form):
         data = form.data
-        subject = f'Добро пожаловать на Foodgram. Регистрация прошла успешно'
+        subject = 'Добро пожаловать на Foodgram. Регистрация прошла успешно'
         content = f'''
             {data["first_name"]}, спасибо за регистрацию на Foodgram.
             Ваш email - {data["email"]}
@@ -63,7 +63,7 @@ class PasswordChangeView(views.PasswordChangeView):
             User,
             username=self.request.user.username
         )
-        subject = f'Ваш пароль был изменен.'
+        subject = 'Ваш пароль был изменен.'
         content = f'''
             {user.username}, Ваш пароль был изменен на новый.
             Ваш email - {user.email}
