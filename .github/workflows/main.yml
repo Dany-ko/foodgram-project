@@ -56,8 +56,8 @@ jobs:
           sudo docker pull ${{ secrets.DOCKER_USERNAME }}/foodgram:latest
           sudo docker-compose stop
           sudo docker-compose rm web
-          sudo docker system prune -a
-          sudo docker volume prune
+          sudo docker system prune -a -y
+          sudo docker volume prune -y
           sudo docker-compose up --build -d
           sudo docker-compose exec web python manage.py migrate --noinput
           sudo docker-compose exec web python manage.py collectstatic --no-input 
