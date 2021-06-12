@@ -1,5 +1,3 @@
-from django import forms
-from django.forms.models import inlineformset_factory
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.decorators import login_required
@@ -7,7 +5,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.template.loader import render_to_string
 from django.http import FileResponse
 from django.views.generic.base import TemplateView
-from django.http import HttpResponse
 
 import io
 import pdfkit
