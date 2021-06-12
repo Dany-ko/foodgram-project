@@ -33,8 +33,15 @@ def generate_pdf(request):
         User, username=request.user
     )
     purchases = recipe_author.purchases.all()
+    objs = {}
+    for recipe in purchases:
+        for ing in recipe.recipe.recipe_ingredients.all():
+            if ing.ingredient in objs.keys():
+                objs[ing.ingredient] += ing.count
+            else:
+                objs[ing.ingredient] = ing.count
     rendered = render_to_string(
-        'recipes/pdf_file.html', {'ingredients': purchases}
+        'recipes/pdf_file.html', {'objs': objs}
     )
     pdf = pdfkit.from_string(rendered, False)
     buffer = io.BytesIO(pdf)
