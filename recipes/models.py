@@ -105,7 +105,7 @@ class Recipe(models.Model):
         Ingredient,
         through='RecipeIngredient',
         through_fields=('recipe', 'ingredient'),
-        verbose_name='Ингридиент',
+        verbose_name='Ингредиент',
     )
     pub_date = models.DateTimeField(
         verbose_name='Дата публикации',

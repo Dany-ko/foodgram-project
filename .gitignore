@@ -8,7 +8,11 @@ __pycache__/
 
 # Distribution / packaging
 data.json
+.vscode/
+some packeges/
+test.py
 static
+recipes/views_copy.py
 templates/recipes/recipe_create copy.html
 .github/workflows/main copy.yml
 no_need/

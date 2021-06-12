@@ -1,0 +1,44 @@
+{% load static %}
+<header class="header">
+    <nav class="nav">
+        <div class="nav__container container" style="margin-top: 40px;">
+
+            <ul class="nav__items list" id="site-name">
+                <li class="nav__item">
+                    <a href="{% url 'index' %}">
+                        <img src="{% static 'images\logo\logo.png' %}" height="150px" />
+                    </a>
+                </li>
+                <li style="width: 400px;">
+                    <h1 style="margin-top: 0%;">Foodgram project</h1>
+                    <i>
+                        "Высокое кулинарное искусство — это единственная
+                        способность человека, о которой нельзя сказать ничего дурного."
+                    </i><br>
+                    <style>
+                        .right {
+                          text-align: right;
+                        }
+                    </style>    
+                    <div class="right">Фридрих Дюрренматт<div>
+                </li>
+            </ul>
+            
+            {% if user.is_authenticated %}
+                <ul class="nav__items list">
+                    {% if user.is_superuser %}
+                        <li class="nav__item"><a href="{% url 'admin:index' %}" class="nav__link link">Админ панель</a></li>
+                    {% endif %}
+                    <li class="nav__item">Пользователь: <a href="{% url 'profile' user.username %}" class="nav__link link">{% firstof user.get_full_name user.username %}</a></li>
+                    <li class="nav__item"><a href="{% url 'password_change' %}" class="nav__link link">Изменить пароль</a></li>
+                    <li class="nav__item"><a href="{% url 'logout' %}" class="nav__link link">Выход</a></li>
+                </ul>
+            {% else %}
+                <ul class="nav__items list">
+                    <li class="nav__item"><a href="{% url 'login' %}" class="nav__link link">Войти</a></li>
+                    <li class="nav__item"><a href="{% url 'signup' %}" class="button button_style_blue">Создать аккаунт</a></li>
+                </ul>
+            {% endif %}
+        </div>
+    </nav>
+</header>

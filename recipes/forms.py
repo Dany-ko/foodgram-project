@@ -1,6 +1,7 @@
 from django import forms
+from django.forms import inlineformset_factory
 
-from recipes.models import Recipe
+from recipes.models import Recipe, Ingredient
 
 
 class RecipeForm(forms.ModelForm):
@@ -20,19 +21,4 @@ class RecipeForm(forms.ModelForm):
         }
         widgets = {
             'tags': forms.CheckboxSelectMultiple(),
-            # 'ingredient': forms.TextInput(
-            #     attrs={
-            #         'id': 'nameIngredient',
-            #         'class': 'form__input',
-            #         'required': False
-            #     }
-            # )
         }
-
-    # def save(self, commit=True):
-    #     if not commit:
-    #         raise NotImplementedError(
-    #             "Can't create Recipe without database save"
-    #         )
-    #     recipe = super().save(commit=False)
-    #     return recipe

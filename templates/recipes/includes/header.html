@@ -1,4 +1,6 @@
-<header class="header">
+
+<header class="header" style="margin-top: 80px;">
+    
     <nav class="nav">
         <div class="nav__container container">
             {% if user.is_authenticated %}
@@ -13,25 +15,13 @@
                         </li>
                     </ul>
                 {% endwith %}
-                <ul class="nav__items list">
-                    <!-- <li class="nav__item">Пользователь: <a href="{% url 'profile' user.username %}" class="nav__link link">{% firstof user.get_full_name user.username %}</a></li> -->
-                    {% if user.is_superuser %}
-                        <li class="nav__item"><a href="{% url 'admin:index' %}" class="nav__link link">Админ панель</a></li>
-                    {% endif %}
-                    <li class="nav__item"><a href="{% url 'password_change' %}" class="nav__link link">Изменить пароль</a></li>
-                    <li class="nav__item"><a href="{% url 'logout' %}" class="nav__link link">Выход</a></li>
-                </ul>
             {% else %}
                 <ul class="nav__items list">
                     <li class="nav__item nav__item_active"><a href="{% url 'index' %}" class="nav__link link">Рецепты</a></li>
                     <!-- <li class="nav__item nav__item_disabled"><a href="#" class="nav__link link">Список покупок <span class="badge badge_style_blue nav__badge" id="counter">4</span></a></li> -->
                 </ul>
-                <ul class="nav__items list">
-                    <li class="nav__item"><a href="{% url 'login' %}" class="nav__link link">Войти</a></li>
-                    <li class="nav__item"><a href="{% url 'signup' %}" class="button button_style_blue">Создать аккаунт</a></li>
-                </ul>
-                
             {% endif %}
         </div>
     </nav>
+    
 </header>

@@ -1,9 +1,15 @@
 from django.contrib import admin
+from django.contrib.auth.models import Group
 
 from recipes.models import (
     Recipe, Ingredient, RecipeIngredient, Tag,
     TagRecipe, Follow, Favorite, Purchase
 )
+
+
+admin.site.site_header = "Панель администрирования Foodgram"
+admin.site.site_title = "Панель администрирования Foodgram"
+admin.site.index_title = "Добро пожаловать в админку"
 
 
 class PurchaseAdmin(admin.ModelAdmin):
@@ -75,3 +81,5 @@ admin.site.register(Tag, TagAdmin)
 admin.site.register(Follow, FollowAdmin)
 admin.site.register(Favorite, FavoriteAdmin)
 admin.site.register(Purchase, PurchaseAdmin)
+
+admin.site.unregister(Group)

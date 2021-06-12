@@ -12,10 +12,10 @@
     </head>
 
     <body>
-        
+        {% include "recipes/includes/logo.html" %}
         {% include "recipes/includes/header.html" %} 
 
-            <main class="main container">
+            <main class="main container" style="padding-top: 10px;">
                 {% block heading %}Продуктовый помощник - Foodgram{% endblock %}
                 {% block content %}{% endblock %}
             </main>

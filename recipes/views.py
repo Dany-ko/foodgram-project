@@ -1,3 +1,5 @@
+from django import forms
+from django.forms.models import inlineformset_factory
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.decorators import login_required
@@ -5,6 +7,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.template.loader import render_to_string
 from django.http import FileResponse
 from django.views.generic.base import TemplateView
+from django.http import HttpResponse
 
 import io
 import pdfkit
@@ -14,8 +17,8 @@ from foodgram_project.settings import (
 )
 from recipes.forms import RecipeForm
 from recipes.models import (
-    Recipe, Tag, User, Follow,
-    RecipeIngredient,
+    Recipe, Tag, User,
+    Follow, RecipeIngredient,
     Ingredient, Purchase
 )
 
@@ -219,7 +222,6 @@ def recipe_create(request):
         request.POST or None,
         files=request.FILES or None
     )
-    ingredients = get_ingredients(request)
     if not form.is_valid():
         context = {
             'form': form,
@@ -232,21 +234,28 @@ def recipe_create(request):
         )
     recipe = form.save(commit=False)
     recipe.author = request.user
-    recipe.save()
     RecipeIngredient.objects.filter(recipe=recipe).delete()
     objs = []
-    for title, count in ingredients.items():
-        # if title == '':
-        #     raise forms.ValidationError(
-        #         'А кто поле будет заполнять, Пушкин?',
-        #         params={'title': title},
-        #     )
-        ingredient = get_object_or_404(Ingredient, title=title)
-        objs.append(RecipeIngredient(
-            recipe=recipe,
-            ingredient=ingredient,
-            count=count
-        ))
+    ingredients = get_ingredients(request)
+    if ingredients:
+        for title, count in ingredients.items():
+            ingredient = get_object_or_404(Ingredient, title=title)
+            objs.append(RecipeIngredient(
+                recipe=recipe,
+                ingredient=ingredient,
+                count=count
+            ))
+    else:
+        context = {
+            'form': form,
+            'error': 'error',
+        }
+        return render(
+            request,
+            'recipes/recipe_create.html',
+            context
+        )
+    recipe.save()
     RecipeIngredient.objects.bulk_create(objs)
     form.save_m2m()
     return redirect('index')
@@ -265,9 +274,8 @@ def recipe_edit(request, slug):
     form = RecipeForm(
         request.POST or None,
         files=request.FILES or None,
-        instance=recipe
+        instance=recipe,
     )
-    ingredients = get_ingredients(request)
     if not form.is_valid():
         context = {
             'form': form, 'recipe': recipe,
@@ -279,18 +287,30 @@ def recipe_edit(request, slug):
             context,
         )
     recipe = form.save(commit=False)
-    recipe.save()
     RecipeIngredient.objects.filter(
         recipe=recipe
     ).delete()
     objs = []
-    for title, count in ingredients.items():
-        ingredient = get_object_or_404(Ingredient, title=title)
-        objs.append(RecipeIngredient(
-            recipe=recipe,
-            ingredient=ingredient,
-            count=count
-        ))
+    ingredients = get_ingredients(request)
+    if ingredients:
+        for title, count in ingredients.items():
+            ingredient = get_object_or_404(Ingredient, title=title)
+            objs.append(RecipeIngredient(
+                recipe=recipe,
+                ingredient=ingredient,
+                count=count
+            ))
+    else:
+        context = {
+            'form': form,
+            'error': 'error',
+        }
+        return render(
+            request,
+            'recipes/recipe_create.html',
+            context
+        )
+    recipe.save()
     RecipeIngredient.objects.bulk_create(objs)
     form.save_m2m()
     return redirect(
